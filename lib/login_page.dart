@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:login_register/forgot_password.dart';
+import 'package:login_register/register_page.dart';
 import 'components.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController userNameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Container(
+        margin: buildEdgeInsetsTextField(),
+        child: ListView(
+          padding: EdgeInsets.fromLTRB(10, 10, 10, 15),
           children: <Widget>[
             Container(
-              margin: buildEdgeInsetsLogo(),
               child: Image.asset("assets/images/login.png"),
             ),
             Container(
               margin: buildEdgeInsetsTextField(),
               child: TextField(
+                controller: userNameController,
                 decoration: InputDecoration(
                     hintText: "Email or Username",
                     hintStyle: TextStyle(color: Colors.grey[300]),
@@ -29,6 +39,7 @@ class LoginPage extends StatelessWidget {
             Container(
               margin: buildEdgeInsetsTextField(),
               child: TextField(
+                controller: userNameController,
                 decoration: InputDecoration(
                     hintText: "Your Password",
                     hintStyle: TextStyle(color: Colors.grey[300]),
@@ -56,9 +67,16 @@ class LoginPage extends StatelessWidget {
             ),
             Container(
               margin: buildEdgeInsetsText(),
-              child: Text(
-                "Forgot Password?",
-                style: TextStyle(color: Colors.grey[700], fontSize: 17),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ForgotPassword();
+                  }));
+                },
+                child: Text(
+                  "Forgot Password?",
+                  style: TextStyle(color: Colors.grey[700], fontSize: 17),
+                ),
               ),
             ),
             Row(
@@ -71,9 +89,17 @@ class LoginPage extends StatelessWidget {
                 SizedBox(
                   width: 10,
                 ),
-                Text(
-                  "Create Account Now !",
-                  style: TextStyle(color: Colors.green[400], fontSize: 14),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return RegisterPage();
+                    }));
+                  },
+                  child: Text(
+                    "Create Account Now !",
+                    style: TextStyle(color: Colors.green[400], fontSize: 14),
+                  ),
                 )
               ],
             )

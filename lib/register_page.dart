@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:login_register/components.dart';
+import 'package:login_register/login_page.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
-        body: SafeArea(
+        body: Container(
+          margin: buildEdgeInsetsTextField(),
           child: ListView(
             children: <Widget>[
               Container(
@@ -79,9 +85,18 @@ class RegisterPage extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    Text(
-                      "Login",
-                      style: TextStyle(color: Colors.green[400], fontSize: 14),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return LoginPage();
+                        }));
+                      },
+                      child: Text(
+                        "Login",
+                        style:
+                            TextStyle(color: Colors.green[400], fontSize: 14),
+                      ),
                     )
                   ],
                 ),
